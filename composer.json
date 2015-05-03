@@ -1,0 +1,31 @@
+{
+	"name": "dmzx/notifyadmin",
+	"type": "phpbb-extension",
+	"description": "When a new user registers on your board, a short e-mail with basic user info will be sent to all administrators of the board.",
+	"homepage": "http://www.dmzx-web.net",
+	"version": "0.0.1",
+	"time": "2015-05-02",
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "dmzx",
+			"email": "info@dmzx-web.net",
+			"homepage": "http://www.dmzx-web.net",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3"
+	},
+	"extra": {
+		"display-name": "Notify Admin on Registration",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.4-RC1,<3.2.*@dev"
+		},
+		"version-check": {
+			"host": "www.phpbb.com",
+			"directory": "/customise/db/extension/notifyadmin",
+			"filename": "version_check"
+		}
+	}
+}

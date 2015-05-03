@@ -1,0 +1,17 @@
+services:
+    dmzx.notifyadmin.listener:
+        class: dmzx\notifyadmin\event\listener
+        arguments:
+            - @auth
+            - @config
+            - @dbal.conn
+            - @user
+            - @template
+            - @controller.helper
+            - @request
+            - %core.php_ext%
+            - %core.table_prefix%
+            - %core.root_path%
+        tags:
+            - { name: event.listener }
+ 
