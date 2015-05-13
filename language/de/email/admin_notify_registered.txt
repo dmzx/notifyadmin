@@ -1,0 +1,12 @@
+Subject: Ein neuer Benutzer hat sich registriert - LPI-Clan
+
+Ein neuer Benutzer hat sich auf der Seite "{SITENAME}" registriert.
+
+Benutzer Details:
+
+Benutzername:		{USERNAME}
+E-mail:				{USER_MAIL}
+Registriert am:			{USER_REGDATE}
+IP:					{USER_IP}
+
+{EMAIL_SIG}
