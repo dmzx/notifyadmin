@@ -1,4 +1,4 @@
-Subject: Ein neuer Benutzer hat sich registriert - LPI-Clan
+Subject: Ein neuer Benutzer hat sich registriert
 
 Ein neuer Benutzer hat sich auf der Seite "{SITENAME}" registriert.
 
