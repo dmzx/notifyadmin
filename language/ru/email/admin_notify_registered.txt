@@ -4,9 +4,9 @@
 
 Подробная информация:
 
-Имя пользователя:       {USERNAME}
-E-mail:         {USER_MAIL}
-Зарегистрирован:      {USER_REGDATE}
-IP:            {USER_IP}
+Имя пользователя:		{USERNAME}
+E-mail:		 {USER_MAIL}
+Зарегистрирован:		{USER_REGDATE}
+IP:			{USER_IP}
 
 {EMAIL_SIG}
