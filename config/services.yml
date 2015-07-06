@@ -7,10 +7,8 @@ services:
             - @dbal.conn
             - @user
             - @template
-            - @controller.helper
             - @request
             - %core.php_ext%
-            - %core.table_prefix%
             - %core.root_path%
         tags:
             - { name: event.listener }
