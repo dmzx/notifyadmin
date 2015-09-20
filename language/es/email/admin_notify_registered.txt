@@ -1,0 +1,8 @@
+Asunto: Un nuevo usuario se ha registrado en su foro"{SITENAME}".Detalles usuario:
+
+Nick:		 {USERNAME}
+E-mail:			{USER_MAIL}
+Registrado el:		{USER_REGDATE}
+IP:				{USER_IP}
+
+{EMAIL_SIG}
