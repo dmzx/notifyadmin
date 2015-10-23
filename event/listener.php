@@ -59,7 +59,7 @@ class listener implements EventSubscriberInterface
 			$result = $this->db->sql_query($sql);
 
 			$data = array(
-				'username'			=> utf8_normalize_nfc($this->request->variable('username', '', true)),
+				'username'			=> $this->request->variable('username', '', true),
 				'email'				=> strtolower($this->request->variable('email', '')),
 				'user_regdate'		=> time(),
 				'user_ip'			=> $this->user->ip,
