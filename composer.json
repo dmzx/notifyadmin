@@ -5,13 +5,14 @@
 	"homepage": "http://www.dmzx-web.net",
 	"version": "1.0.0",
 	"time": "2015-05-02",
+	"keywords": ["phpbb", "extension", "notifyadmin"],
 	"license": "GPL-2.0",
 	"authors": [
 		{
 			"name": "dmzx",
-			"email": "info@dmzx-web.net",
 			"homepage": "http://www.dmzx-web.net",
-			"role": "Developer"
+			"email": "info@dmzx-web.net",
+			"role": "Extension Developer"
 		}
 	],
 	"require": {
