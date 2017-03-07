@@ -1,0 +1,12 @@
+Assunto: Novo registro de usuário
+
+Um usuário registrou-se no seu fórum "{SITENAME}".
+
+Detalhes do usuário:
+
+Nome:		 {USERNAME}
+E-mail:			{USER_MAIL}
+Registrado em:		{USER_REGDATE}
+IP:				{USER_IP}
+
+{EMAIL_SIG}

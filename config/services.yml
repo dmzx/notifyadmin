@@ -2,14 +2,14 @@ services:
     dmzx.notifyadmin.listener:
         class: dmzx\notifyadmin\event\listener
         arguments:
-            - @auth
-            - @config
-            - @dbal.conn
-            - @user
-            - @template
-            - @request
-            - %core.php_ext%
-            - %core.root_path%
+            - '@auth'
+            - '@config'
+            - '@dbal.conn'
+            - '@user'
+            - '@template'
+            - '@request'
+            - '%core.php_ext%'
+            - '%core.root_path%'
         tags:
             - { name: event.listener }
  

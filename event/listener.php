@@ -1,10 +1,9 @@
 <?php
 /**
 *
-* @package Notify Admin on Registration
-* @author dmzx (www.dmzx-web.net)
-* @copyright (c) 2015 by dmzx (www.dmzx-web.net)
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package phpBB Extension - Notify Admin on Registration
+* @copyright (c) 2015 dmzx - http://www.dmzx-web.net
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
@@ -17,24 +16,72 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var \phpbb\template\template */
+	protected $template;
+
+	/** @var \phpbb\request\request */
+	protected $request
+
+	/** @var string */
+	protected $php_ext;
+
+	/** @var string */
+	protected $root_path;
+
+	/**
+	* Constructor
+	*
+	* @param \phpbb\auth\auth					$auth
+	* @param \phpbb\config\config				$config
+	* @param \phpbb\db\driver\driver_interface	$db
+	* @param \phpbb\user						$user
+	* @param \phpbb\template\template			$template
+	* @param \phpbb\request\request			 	$request
+	* @param string								$php_ext
+	* @param string								$root_path
+	*
+	*/
+	public function __construct(
+		\phpbb\auth\auth $auth,
+		\phpbb\config\config $config,
+		\phpbb\db\driver\driver_interface $db,
+		\phpbb\user $user,
+		\phpbb\template\template $template,
+		\phpbb\request\request $request,
+		$php_ext,
+		$root_path
+	)
+	{
+		$this->auth 		= $auth;
+		$this->config 		= $config;
+		$this->db 			= $db;
+		$this->user 		= $user;
+		$this->template 	= $template;
+		$this->request 		= $request;
+		$this->php_ext 		= $php_ext;
+		$this->root_path 	= $root_path;
+	}
 
 	static public function getSubscribedEvents()
 	{
 		return array(
 			'core.ucp_register_user_row_after'		=> 'ucp_register_user_row_after',
 		);
-	}
-
-	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config,\phpbb\db\driver\driver_interface $db, $user, $template, $request, $php_ext, $phpbb_root_path)
-	{
-		$this->auth = $auth;
-		$this->config = $config;
-		$this->db = $db;
-		$this->user = $user;
-		$this->template = $template;
-		$this->request = $request;
-		$this->php_ext = $php_ext;
-		$this->phpbb_root_path = $phpbb_root_path;
 	}
 
 	public function ucp_register_user_row_after($event)
@@ -70,7 +117,7 @@ class listener implements EventSubscriberInterface
 			{
 				if (!class_exists('messenger'))
 				{
-					include($this->phpbb_root_path . 'includes/functions_messenger.' . $this->php_ext);
+					include($this->root_path . 'includes/functions_messenger.' . $this->php_ext);
 				}
 
 				$messenger = new \messenger(false);
@@ -81,10 +128,10 @@ class listener implements EventSubscriberInterface
 				$messenger->im($row['user_jabber'], $row['username']);
 
 				$messenger->assign_vars(array(
-					'USERNAME'		 => htmlspecialchars_decode($data['username']),
-					'USER_MAIL'		 => $data['email'],
+					'USERNAME'		 	=> htmlspecialchars_decode($data['username']),
+					'USER_MAIL'		 	=> $data['email'],
 					'USER_REGDATE'		=> date($this->config['default_dateformat'], $data['user_regdate']),
-					'USER_IP'		 => $data['user_ip'])
+					'USER_IP'		 	=> $data['user_ip'])
 				);
 
 				$messenger->send(NOTIFY_EMAIL);
