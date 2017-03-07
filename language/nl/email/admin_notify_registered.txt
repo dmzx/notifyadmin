@@ -1,0 +1,12 @@
+Subject: Een nieuwe gebruiker heeft zich geregistreerd
+
+Een nieuwe gebruiker heeft zich geregistreerd op jouw forum "{SITENAME}".
+
+Gebruiker details:
+
+Gebruikersnaam: {USERNAME}
+E-mail: {USER_MAIL}
+Geregistreerd op: {USER_REGDATE}
+IP: {USER_IP}
+
+{EMAIL_SIG}

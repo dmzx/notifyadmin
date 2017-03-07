@@ -22,9 +22,6 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	/** @var \phpbb\config\config */
-	protected $config;
-
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
@@ -35,7 +32,7 @@ class listener implements EventSubscriberInterface
 	protected $template;
 
 	/** @var \phpbb\request\request */
-	protected $request
+	protected $request;
 
 	/** @var string */
 	protected $php_ext;
