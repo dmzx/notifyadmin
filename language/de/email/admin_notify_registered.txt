@@ -1,6 +1,6 @@
 Subject: Ein neuer Benutzer hat sich registriert
 
-Ein neuer Benutzer hat sich auf der Seite "{SITENAME}" registriert.
+Ein neuer Benutzer hat sich auf deiner Seite "{SITENAME}" registriert.
 
 Benutzer Details:
 
