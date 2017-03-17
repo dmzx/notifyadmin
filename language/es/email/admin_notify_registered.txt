@@ -1,8 +1,12 @@
-Asunto: Un nuevo usuario se ha registrado en su foro"{SITENAME}".Detalles usuario:
+Subject: Un nuevo usuario se ha registrado
 
-Nick:		 {USERNAME}
-E-mail:			{USER_MAIL}
-Registrado el:		{USER_REGDATE}
-IP:				{USER_IP}
+Un nuevo usuario se ha registrado en su foro "{SITENAME}".
+
+Detalles del usuario:
+
+Nombre:	{USERNAME}
+E-mail:	{USER_MAIL}
+Registrado el:	{USER_REGDATE}
+IP:	{USER_IP}
 
 {EMAIL_SIG}
