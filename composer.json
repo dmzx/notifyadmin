@@ -2,7 +2,7 @@
 	"name": "dmzx/notifyadmin",
 	"type": "phpbb-extension",
 	"description": "When a new user registers on your board, a short e-mail with basic user info will be sent to all administrators of the board.",
-	"homepage": "http://www.dmzx-web.net",
+	"homepage": "https://www.dmzx-web.net",
 	"version": "1.0.1",
 	"time": "2017-01-21",
 	"keywords": [
@@ -10,18 +10,18 @@
 		"extension",
 		"notifyadmin"
 	],
-	"license": "GPL-2.0",
+	"license": "GPL-2.0-only",
 	"authors": [
 		{
 			"name": "dmzx",
-			"homepage": "http://www.dmzx-web.net",
+			"homepage": "https://www.dmzx-web.net",
 			"email": "info@dmzx-web.net",
 			"role": "Extension Developer"
 		}
 	],
 	"require": {
 		"php": ">=5.3",
-		"phpbb/phpbb": ">=3.1.4-RC1,<3.3"
+		"composer/installers": "~1.0"
 	},
 	"require-dev": {
 		"phpbb/epv": "dev-master"
@@ -34,7 +34,8 @@
 		"version-check": {
 			"host": "www.dmzx-web.net",
 			"directory": "/versions",
-			"filename": "notifyadmin_version.json"
+			"filename": "notifyadmin_version.json",
+			"ssl": true
 		}
 	}
 }
