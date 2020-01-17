@@ -9,4 +9,4 @@
 تاريخ التسجيل :		{USER_REGDATE}
 رقم الـ IP:				{USER_IP}
 
-{EMAIL_SIG}SIG}
+{EMAIL_SIG}

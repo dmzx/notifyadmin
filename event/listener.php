@@ -9,9 +9,6 @@
 
 namespace dmzx\notifyadmin\event;
 
-/**
-* Event listener
-*/
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
@@ -83,6 +80,7 @@ class listener implements EventSubscriberInterface
 
 	public function ucp_register_user_row_after($event)
 	{
+
 		if ($this->config['require_activation'] != USER_ACTIVATION_ADMIN)
 		{
 			// Grab an array of user_id's with a_user permissions ... these users can activate a user

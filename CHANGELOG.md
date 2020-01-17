@@ -1,4 +1,8 @@
-## Changelog
+## Notify Admin on Registration Changelog
+
+### 1.0.2 - 2020-01-15
+
+- Drop support for 3.1.
 
 ### 1.0.1 - 2017-01-21
 
