@@ -1,5 +1,10 @@
 ## Notify Admin on Registration Changelog
 
+### 1.0.3 - 2020-02-14
+
+- Added html support for emails. (requires HTML email extension)
+- Drop support for 3.2.
+
 ### 1.0.2 - 2020-01-15
 
 - Drop support for 3.1.

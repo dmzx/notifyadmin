@@ -8,6 +8,7 @@ services:
             - '@user'
             - '@template'
             - '@request'
+            - '@service_container'
             - '%core.php_ext%'
             - '%core.root_path%'
         tags:

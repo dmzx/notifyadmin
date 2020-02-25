@@ -10,26 +10,36 @@
 namespace dmzx\notifyadmin\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use phpbb\auth\auth;
+use phpbb\config\config;
+use phpbb\db\driver\driver_interface as db_interface;
+use phpbb\user;
+use phpbb\template\template;
+use phpbb\request\request_interface;
+use Symfony\Component\DependencyInjection\Container;
 
 class listener implements EventSubscriberInterface
 {
-	/** @var \phpbb\auth\auth */
+	/** @var auth */
 	protected $auth;
 
-	/** @var \phpbb\config\config */
+	/** @var config */
 	protected $config;
 
-	/** @var \phpbb\db\driver\driver_interface */
+	/** @var db_interface */
 	protected $db;
 
-	/** @var \phpbb\user */
+	/** @var user */
 	protected $user;
 
-	/** @var \phpbb\template\template */
+	/** @var template */
 	protected $template;
 
-	/** @var \phpbb\request\request */
+	/** @var request_interface */
 	protected $request;
+
+	/** @var Container */
+	protected $phpbb_container;
 
 	/** @var string */
 	protected $php_ext;
@@ -40,35 +50,38 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\auth\auth					$auth
-	* @param \phpbb\config\config				$config
-	* @param \phpbb\db\driver\driver_interface	$db
-	* @param \phpbb\user						$user
-	* @param \phpbb\template\template			$template
-	* @param \phpbb\request\request			 	$request
-	* @param string								$php_ext
-	* @param string								$root_path
+	* @param auth				$auth
+	* @param config				$config
+	* @param db_interface		$db
+	* @param user				$user
+	* @param template			$template
+	* @param request_interface	$request
+	* @param Container 			$phpbb_container
+	* @param string				$php_ext
+	* @param string				$root_path
 	*
 	*/
 	public function __construct(
-		\phpbb\auth\auth $auth,
-		\phpbb\config\config $config,
-		\phpbb\db\driver\driver_interface $db,
-		\phpbb\user $user,
-		\phpbb\template\template $template,
-		\phpbb\request\request $request,
+		auth $auth,
+		config $config,
+		db_interface $db,
+		user $user,
+		template $template,
+		request_interface	$request,
+		Container $phpbb_container,
 		$php_ext,
 		$root_path
 	)
 	{
-		$this->auth 		= $auth;
-		$this->config 		= $config;
-		$this->db 			= $db;
-		$this->user 		= $user;
-		$this->template 	= $template;
-		$this->request 		= $request;
-		$this->php_ext 		= $php_ext;
-		$this->root_path 	= $root_path;
+		$this->auth 				= $auth;
+		$this->config 				= $config;
+		$this->db 					= $db;
+		$this->user 				= $user;
+		$this->template 			= $template;
+		$this->request 				= $request;
+		$this->phpbb_container 		= $phpbb_container;
+		$this->php_ext 				= $php_ext;
+		$this->root_path 			= $root_path;
 	}
 
 	static public function getSubscribedEvents()
@@ -115,9 +128,14 @@ class listener implements EventSubscriberInterface
 				}
 
 				$messenger = new \messenger(false);
-				$server_url = generate_board_url();
 
-				$messenger->template('@dmzx_notifyadmin/admin_notify_registered', $data['lang']);
+				$use_html = ($this->phpbb_container ->get('ext.manager')->is_enabled('dmzx/htmlemail')) ? true : false;
+				($use_html) ? $messenger->set_mail_html(true) : null;
+
+				$this->board_url = generate_board_url();
+
+				$templ = 'admin_notify_registered.' . (($use_html) ? 'html' : 'txt');
+				$messenger->template('@dmzx_notifyadmin/' . $templ, $data['lang']);
 				$messenger->to($row['user_email'], $row['username']);
 				$messenger->im($row['user_jabber'], $row['username']);
 
@@ -125,8 +143,10 @@ class listener implements EventSubscriberInterface
 					'USERNAME'		 	=> htmlspecialchars_decode($data['username']),
 					'USER_MAIL'		 	=> $data['email'],
 					'USER_REGDATE'		=> date($this->config['default_dateformat'], $data['user_regdate']),
-					'USER_IP'		 	=> $data['user_ip'])
-				);
+					'USER_IP'		 	=> $data['user_ip'],
+					'SITE_LOGO_IMG'		=> $this->board_url . '/styles/prosilver/theme/images/site_logo.svg',
+					'BOARD_URL'			=> $this->board_url,
+				));
 
 				$messenger->send(NOTIFY_EMAIL);
 			}
