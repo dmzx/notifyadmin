@@ -9,6 +9,7 @@
 
 namespace dmzx\notifyadmin\event;
 
+use messenger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use phpbb\auth\auth;
 use phpbb\config\config;
@@ -67,7 +68,7 @@ class listener implements EventSubscriberInterface
 		db_interface $db,
 		user $user,
 		template $template,
-		request_interface	$request,
+		request_interface $request,
 		Container $phpbb_container,
 		$php_ext,
 		$root_path
@@ -127,7 +128,7 @@ class listener implements EventSubscriberInterface
 					include($this->root_path . 'includes/functions_messenger.' . $this->php_ext);
 				}
 
-				$messenger = new \messenger(false);
+				$messenger = new messenger(false);
 
 				$use_html = ($this->phpbb_container ->get('ext.manager')->is_enabled('dmzx/htmlemail')) ? true : false;
 				($use_html) ? $messenger->set_mail_html(true) : null;

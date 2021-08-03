@@ -9,7 +9,9 @@
 
 namespace dmzx\notifyadmin;
 
-class ext extends \phpbb\extension\base
+use phpbb\extension\base;
+
+class ext extends base
 {
 	public function is_enableable()
 	{
