@@ -1,6 +1,6 @@
 # phpBB Notify Admin on Registration Extension
 
-[![Build Status](https://travis-ci.org/dmzx/notifyadmin.svg?branch=master)](https://travis-ci.org/dmzx/notifyadmin)
+[![Build Status](https://github.com/dmzx/notifyadmin/workflows/Tests/badge.svg)](https://github.com/phpbb-extensions/dmzx/notifyadmin)
 
 ## Install
 1. Download the latest release.
