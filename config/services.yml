@@ -1,6 +1,6 @@
 services:
     dmzx.notifyadmin.listener:
-        class: dmzx\notifyadmin\event\listener
+        class: 'dmzx\notifyadmin\event\listener'
         arguments:
             - '@auth'
             - '@config'
@@ -12,5 +12,5 @@ services:
             - '%core.php_ext%'
             - '%core.root_path%'
         tags:
-            - { name: event.listener }
+            - { name: 'event.listener' }
  
