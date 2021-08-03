@@ -9,7 +9,6 @@
 
 namespace dmzx\notifyadmin\event;
 
-use messenger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use phpbb\auth\auth;
 use phpbb\config\config;
@@ -87,9 +86,9 @@ class listener implements EventSubscriberInterface
 
 	static public function getSubscribedEvents()
 	{
-		return array(
+		return [
 			'core.ucp_register_user_row_after'		=> 'ucp_register_user_row_after',
-		);
+		];
 	}
 
 	public function ucp_register_user_row_after($event)
@@ -99,7 +98,7 @@ class listener implements EventSubscriberInterface
 		{
 			// Grab an array of user_id's with a_user permissions ... these users can activate a user
 			$admin_ary = $this->auth->acl_get_list(false, 'a_user', false);
-			$admin_ary = (!empty($admin_ary[0]['a_user'])) ? $admin_ary[0]['a_user'] : array();
+			$admin_ary = (!empty($admin_ary[0]['a_user'])) ? $admin_ary[0]['a_user'] : [];
 
 			// Also include founders
 			$where_sql = ' WHERE user_type = ' . USER_FOUNDER;
@@ -113,13 +112,13 @@ class listener implements EventSubscriberInterface
 				FROM ' . USERS_TABLE . ' ' . $where_sql;
 			$result = $this->db->sql_query($sql);
 
-			$data = array(
+			$data = [
 				'username'			=> $this->request->variable('username', '', true),
 				'email'				=> strtolower($this->request->variable('email', '')),
 				'user_regdate'		=> time(),
 				'user_ip'			=> $this->user->ip,
 				'lang'				=> basename($this->request->variable('lang', $this->user->lang_name)),
-			);
+			];
 
 			while ($row = $this->db->sql_fetchrow($result))
 			{
@@ -140,14 +139,14 @@ class listener implements EventSubscriberInterface
 				$messenger->to($row['user_email'], $row['username']);
 				$messenger->im($row['user_jabber'], $row['username']);
 
-				$messenger->assign_vars(array(
+				$messenger->assign_vars([
 					'USERNAME'		 	=> htmlspecialchars_decode($data['username']),
 					'USER_MAIL'		 	=> $data['email'],
 					'USER_REGDATE'		=> date($this->config['default_dateformat'], $data['user_regdate']),
 					'USER_IP'		 	=> $data['user_ip'],
 					'SITE_LOGO_IMG'		=> $this->board_url . '/styles/prosilver/theme/images/site_logo.svg',
 					'BOARD_URL'			=> $this->board_url,
-				));
+				]);
 
 				$messenger->send(NOTIFY_EMAIL);
 			}
