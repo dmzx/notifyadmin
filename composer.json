@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "When a new user registers on your board, a short e-mail with basic user info will be sent to all administrators of the board.",
 	"homepage": "https://www.dmzx-web.net",
-	"version": "1.0.3",
-	"time": "2020-02-14",
+	"version": "1.0.4",
+	"time": "2021-08-04",
 	"keywords": [
 		"phpbb",
 		"extension",
