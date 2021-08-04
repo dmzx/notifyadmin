@@ -87,15 +87,17 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return [
-			'core.ucp_register_user_row_after'		=> 'ucp_register_user_row_after',
+			'core.ucp_register_welcome_email_before' => 'ucp_register_welcome_email_before',
 		];
 	}
 
-	public function ucp_register_user_row_after($event)
+	public function ucp_register_welcome_email_before($event)
 	{
-
 		if ($this->config['require_activation'] != USER_ACTIVATION_ADMIN)
 		{
+			// Get user_id
+			$this->user_id = $event['user_id'];
+
 			// Grab an array of user_id's with a_user permissions ... these users can activate a user
 			$admin_ary = $this->auth->acl_get_list(false, 'a_user', false);
 			$admin_ary = (!empty($admin_ary[0]['a_user'])) ? $admin_ary[0]['a_user'] : [];
@@ -127,12 +129,13 @@ class listener implements EventSubscriberInterface
 					include($this->root_path . 'includes/functions_messenger.' . $this->php_ext);
 				}
 
-				$messenger = new messenger(false);
+				$messenger = new \messenger(false);
 
 				$use_html = ($this->phpbb_container ->get('ext.manager')->is_enabled('dmzx/htmlemail')) ? true : false;
 				($use_html) ? $messenger->set_mail_html(true) : null;
 
 				$this->board_url = generate_board_url();
+				$this->profile_url = append_sid($this->board_url . '/memberlist.' . $this->php_ext , 'mode=viewprofile&u=' . $this->user_id, false);
 
 				$templ = 'admin_notify_registered.' . (($use_html) ? 'html' : 'txt');
 				$messenger->template('@dmzx_notifyadmin/' . $templ, $data['lang']);
@@ -146,6 +149,7 @@ class listener implements EventSubscriberInterface
 					'USER_IP'		 	=> $data['user_ip'],
 					'SITE_LOGO_IMG'		=> $this->board_url . '/styles/prosilver/theme/images/site_logo.svg',
 					'BOARD_URL'			=> $this->board_url,
+					'PROFILE_URL'		=> $this->profile_url,
 				]);
 
 				$messenger->send(NOTIFY_EMAIL);

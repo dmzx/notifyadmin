@@ -1,5 +1,11 @@
 ## Notify Admin on Registration Changelog
 
+### 1.0.4 - 2021-08-04
+
+- Changed core event in listener.
+- Added profile link in message.
+- Short syntax code.
+
 ### 1.0.3 - 2020-02-14
 
 - Added html support for emails. (requires HTML email extension)

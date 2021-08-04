@@ -9,4 +9,6 @@ E-mail:			{USER_MAIL}
 Registered on:		{USER_REGDATE}
 IP:				{USER_IP}
 
-{EMAIL_SIG}
+Visit the following link to see the profile:
+
+{PROFILE_URL}
